@@ -1,0 +1,202 @@
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  body {
+    @apply bg-soft-gray text-deep-navy font-sans antialiased;
+    @apply m-0 p-0;
+    @apply min-h-screen;
+  }
+
+  h1 {
+    @apply text-h1;
+  }
+
+  h2 {
+    @apply text-h2;
+  }
+
+  h3 {
+    @apply text-h3;
+  }
+
+  h4 {
+    @apply text-h4;
+  }
+
+  p {
+    @apply text-body;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-soft-gray;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-gray rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-charcoal;
+  }
+}
+
+@layer components {
+  /* Button Components */
+  .btn-primary {
+    @apply bg-royal-blue text-pure-white px-6 py-3 rounded-button;
+    @apply font-semibold transition-all duration-200;
+    @apply hover:scale-105 active:scale-95;
+    @apply focus:outline-none focus:ring-2 focus:ring-royal-blue focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-gray-200 text-deep-navy px-6 py-3 rounded-button;
+    @apply font-semibold transition-all duration-200;
+    @apply hover:border-royal-blue active:scale-95;
+    @apply focus:outline-none focus:ring-2 focus:ring-royal-blue focus:ring-offset-2;
+  }
+
+  .btn-danger {
+    @apply bg-error-red text-pure-white px-6 py-3 rounded-button;
+    @apply font-semibold transition-all duration-200;
+    @apply hover:scale-105 active:scale-95;
+    @apply focus:outline-none focus:ring-2 focus:ring-error-red focus:ring-offset-2;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+
+  /* Card Components */
+  .card {
+    @apply bg-pure-white border border-gray-200 rounded-card p-8;
+    @apply shadow-card transition-shadow duration-300;
+    @apply hover:shadow-card-hover;
+  }
+
+  /* Input Components */
+  .input {
+    @apply bg-pure-white border-[1.5px] border-gray-200 rounded-button px-4 py-3;
+    @apply text-body transition-colors duration-200;
+    @apply placeholder:text-slate-gray;
+    @apply focus:outline-none focus:border-royal-blue focus:ring-2 focus:ring-royal-blue focus:ring-opacity-20;
+  }
+
+  .input-error {
+    @apply border-error-red focus:border-error-red focus:ring-error-red;
+  }
+
+  .label {
+    @apply text-body-sm font-medium text-deep-navy mb-2 block;
+  }
+
+  .error-message {
+    @apply text-body-sm text-error-red mt-1;
+  }
+
+  /* Table Components */
+  .table {
+    @apply w-full border-collapse;
+  }
+
+  .table-header {
+    @apply bg-soft-gray;
+  }
+
+  .table-header-cell {
+    @apply px-4 py-4 text-left text-caption uppercase text-slate-gray font-semibold tracking-wide;
+  }
+
+  .table-row {
+    @apply border-b border-gray-200 transition-colors duration-150;
+    @apply hover:bg-soft-gray;
+  }
+
+  .table-cell {
+    @apply px-4 py-4 text-body;
+  }
+
+  .table-cell-number {
+    @apply text-right font-mono;
+  }
+
+  /* Badge Components */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-caption font-medium;
+  }
+
+  .badge-success {
+    @apply bg-success-green bg-opacity-10 text-success-green;
+  }
+
+  .badge-warning {
+    @apply bg-warning-amber bg-opacity-10 text-warning-amber;
+  }
+
+  .badge-error {
+    @apply bg-error-red bg-opacity-10 text-error-red;
+  }
+
+  .badge-info {
+    @apply bg-info-blue bg-opacity-10 text-info-blue;
+  }
+
+  .badge-default {
+    @apply bg-slate-gray bg-opacity-10 text-slate-gray;
+  }
+
+  /* Container Components */
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+  }
+
+  /* Loading Spinner */
+  .spinner {
+    @apply animate-spin rounded-full border-2 border-gray-200 border-t-royal-blue;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  /* Truncate text utilities */
+  .truncate-2-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .truncate-3-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

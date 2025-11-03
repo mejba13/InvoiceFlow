@@ -1,0 +1,56 @@
+/**
+ * Sidebar Navigation Component
+ */
+
+import { NavLink } from 'react-router-dom';
+import {
+  HomeIcon,
+  UserGroupIcon,
+  DocumentTextIcon,
+  CreditCardIcon,
+  CurrencyDollarIcon,
+  ChartBarIcon,
+  Cog6ToothIcon,
+} from '@heroicons/react/24/outline';
+
+const navigation = [
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
+  { name: 'Clients', href: '/clients', icon: UserGroupIcon },
+  { name: 'Invoices', href: '/invoices', icon: DocumentTextIcon },
+  { name: 'Payments', href: '/payments', icon: CreditCardIcon },
+  { name: 'Expenses', href: '/expenses', icon: CurrencyDollarIcon },
+  { name: 'Reports', href: '/reports', icon: ChartBarIcon },
+  { name: 'Settings', href: '/settings', icon: Cog6ToothIcon },
+];
+
+export const Sidebar = () => {
+  return (
+    <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+      <div className="flex flex-col flex-grow bg-deep-navy pt-5 pb-4 overflow-y-auto">
+        <div className="flex items-center flex-shrink-0 px-4">
+          <h1 className="text-2xl font-bold text-pure-white">InvoiceFlow</h1>
+        </div>
+        <div className="mt-8 flex-1 flex flex-col">
+          <nav className="flex-1 px-2 space-y-1">
+            {navigation.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.href}
+                className={({ isActive }) =>
+                  `group flex items-center px-3 py-3 text-sm font-medium rounded-button transition-colors duration-200 ${
+                    isActive
+                      ? 'bg-royal-blue text-pure-white'
+                      : 'text-slate-gray hover:bg-charcoal hover:text-pure-white'
+                  }`
+                }
+              >
+                <item.icon className="mr-3 flex-shrink-0 h-6 w-6" aria-hidden="true" />
+                {item.name}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </div>
+  );
+};
