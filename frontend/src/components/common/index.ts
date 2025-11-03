@@ -1,5 +1,5 @@
 /**
- * Common Components Barrel Export
+ * Common Components Exports
  */
 
 export { Button } from './Button';

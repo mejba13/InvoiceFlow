@@ -125,59 +125,39 @@ class Command(BaseCommand):
                 'email': 'contact@techcorp.com',
                 'phone': '+1 (555) 111-2222',
                 'company_name': 'Tech Corporation Inc.',
-                'address': '123 Tech Street',
-                'city': 'San Francisco',
-                'state': 'CA',
-                'postal_code': '94105',
-                'country': 'United States',
-                'tax_id': 'TC-123456',
+                'address': '123 Tech Street\nSan Francisco, CA 94105\nUnited States',
+                'notes': 'Tax ID: TC-123456',
             },
             {
                 'name': 'Startup Ventures',
                 'email': 'hello@startupventures.io',
                 'phone': '+1 (555) 222-3333',
                 'company_name': 'Startup Ventures LLC',
-                'address': '456 Innovation Ave',
-                'city': 'Austin',
-                'state': 'TX',
-                'postal_code': '78701',
-                'country': 'United States',
-                'tax_id': 'SV-789012',
+                'address': '456 Innovation Ave\nAustin, TX 78701\nUnited States',
+                'notes': 'Tax ID: SV-789012',
             },
             {
                 'name': 'Global Industries',
                 'email': 'info@globalindustries.com',
                 'phone': '+1 (555) 333-4444',
                 'company_name': 'Global Industries Group',
-                'address': '789 Business Blvd',
-                'city': 'New York',
-                'state': 'NY',
-                'postal_code': '10001',
-                'country': 'United States',
-                'tax_id': 'GI-345678',
+                'address': '789 Business Blvd\nNew York, NY 10001\nUnited States',
+                'notes': 'Tax ID: GI-345678',
             },
             {
                 'name': 'Local Coffee Shop',
                 'email': 'owner@localcoffee.com',
                 'phone': '+1 (555) 444-5555',
                 'company_name': 'Local Coffee Shop',
-                'address': '321 Main Street',
-                'city': 'Portland',
-                'state': 'OR',
-                'postal_code': '97201',
-                'country': 'United States',
+                'address': '321 Main Street\nPortland, OR 97201\nUnited States',
             },
             {
                 'name': 'E-Commerce Solutions',
                 'email': 'support@ecommercesolutions.com',
                 'phone': '+1 (555) 555-6666',
                 'company_name': 'E-Commerce Solutions Inc.',
-                'address': '654 Digital Lane',
-                'city': 'Seattle',
-                'state': 'WA',
-                'postal_code': '98101',
-                'country': 'United States',
-                'tax_id': 'EC-901234',
+                'address': '654 Digital Lane\nSeattle, WA 98101\nUnited States',
+                'notes': 'Tax ID: EC-901234',
             },
         ]
 
@@ -258,18 +238,17 @@ class Command(BaseCommand):
     def create_payments(self, invoices):
         """Create sample payments for paid invoices"""
         payments = []
-        payment_methods = ['bank_transfer', 'credit_card', 'paypal', 'check']
+        payment_methods = ['BANK_TRANSFER', 'CREDIT_CARD', 'PAYPAL', 'CHECK']
 
         for invoice in invoices:
             if invoice.status == 'paid':
                 # Full payment
                 payment = Payment.objects.create(
-                    user=invoice.user,
                     invoice=invoice,
                     amount=invoice.total_amount,
                     payment_date=invoice.issue_date + timedelta(days=20),
                     payment_method=payment_methods[len(payments) % len(payment_methods)],
-                    reference=f'PAY-{invoice.invoice_number}',
+                    transaction_id=f'PAY-{invoice.invoice_number}',
                     notes='Payment received in full',
                 )
                 payments.append(payment)
@@ -278,12 +257,11 @@ class Command(BaseCommand):
                 import random
                 if random.choice([True, False]):
                     payment = Payment.objects.create(
-                        user=invoice.user,
                         invoice=invoice,
                         amount=invoice.total_amount / 2,
                         payment_date=invoice.issue_date + timedelta(days=10),
                         payment_method=payment_methods[len(payments) % len(payment_methods)],
-                        reference=f'PAY-{invoice.invoice_number}-PARTIAL',
+                        transaction_id=f'PAY-{invoice.invoice_number}-PARTIAL',
                         notes='Partial payment received',
                     )
                     payments.append(payment)
@@ -296,72 +274,72 @@ class Command(BaseCommand):
             {
                 'description': 'Adobe Creative Cloud Subscription',
                 'amount': Decimal('54.99'),
-                'category': 'software',
+                'category': 'SOFTWARE',
                 'vendor': 'Adobe Inc.',
-                'date': timezone.now().date() - timedelta(days=5),
+                'expense_date': timezone.now().date() - timedelta(days=5),
             },
             {
                 'description': 'Office Supplies',
                 'amount': Decimal('127.50'),
-                'category': 'office',
+                'category': 'OFFICE_SUPPLIES',
                 'vendor': 'Office Depot',
-                'date': timezone.now().date() - timedelta(days=10),
+                'expense_date': timezone.now().date() - timedelta(days=10),
             },
             {
                 'description': 'Client Lunch Meeting',
                 'amount': Decimal('85.00'),
-                'category': 'meals',
+                'category': 'MEALS',
                 'vendor': 'Italian Restaurant',
-                'date': timezone.now().date() - timedelta(days=7),
+                'expense_date': timezone.now().date() - timedelta(days=7),
             },
             {
                 'description': 'Flight to Conference',
                 'amount': Decimal('450.00'),
-                'category': 'travel',
+                'category': 'TRAVEL',
                 'vendor': 'United Airlines',
-                'date': timezone.now().date() - timedelta(days=15),
+                'expense_date': timezone.now().date() - timedelta(days=15),
             },
             {
                 'description': 'Hotel Stay (3 nights)',
                 'amount': Decimal('420.00'),
-                'category': 'travel',
+                'category': 'TRAVEL',
                 'vendor': 'Hilton Hotels',
-                'date': timezone.now().date() - timedelta(days=14),
+                'expense_date': timezone.now().date() - timedelta(days=14),
             },
             {
                 'description': 'Internet & Phone Service',
                 'amount': Decimal('125.00'),
-                'category': 'utilities',
+                'category': 'UTILITIES',
                 'vendor': 'Comcast',
-                'date': timezone.now().date() - timedelta(days=3),
+                'expense_date': timezone.now().date() - timedelta(days=3),
             },
             {
                 'description': 'Google Workspace',
                 'amount': Decimal('12.00'),
-                'category': 'software',
+                'category': 'SOFTWARE',
                 'vendor': 'Google LLC',
-                'date': timezone.now().date() - timedelta(days=2),
+                'expense_date': timezone.now().date() - timedelta(days=2),
             },
             {
                 'description': 'LinkedIn Advertising',
                 'amount': Decimal('200.00'),
-                'category': 'marketing',
+                'category': 'MARKETING',
                 'vendor': 'LinkedIn Corporation',
-                'date': timezone.now().date() - timedelta(days=8),
+                'expense_date': timezone.now().date() - timedelta(days=8),
             },
             {
                 'description': 'Printer Ink Cartridges',
                 'amount': Decimal('89.99'),
-                'category': 'office',
+                'category': 'OFFICE_SUPPLIES',
                 'vendor': 'Amazon',
-                'date': timezone.now().date() - timedelta(days=12),
+                'expense_date': timezone.now().date() - timedelta(days=12),
             },
             {
                 'description': 'Coffee with Potential Client',
                 'amount': Decimal('28.50'),
-                'category': 'meals',
+                'category': 'MEALS',
                 'vendor': 'Starbucks',
-                'date': timezone.now().date() - timedelta(days=4),
+                'expense_date': timezone.now().date() - timedelta(days=4),
             },
         ]
 
