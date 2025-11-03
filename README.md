@@ -2,6 +2,8 @@
 
 A modern B2B SaaS application for invoice creation, payment tracking, client management, and financial reporting.
 
+📖 **New to InvoiceFlow?** Check out the [Quick Start Guide](./QUICKSTART.md) to get running in 5 minutes!
+
 ## Tech Stack
 
 ### Backend
@@ -58,6 +60,79 @@ docker-compose up -d
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8000
 - Django Admin: http://localhost:8000/admin
+
+## Quick Setup with Seed Data
+
+For the fastest way to get started with sample data:
+
+### Using Make (Recommended for Unix/Mac)
+
+```bash
+# Complete setup: build, start, migrate, and seed
+make dev
+
+# Or individual commands
+make build      # Build containers
+make up         # Start services
+make migrate    # Run migrations
+make seed       # Add sample data
+make seed-clear # Clear and reseed data
+
+# See all available commands
+make help
+```
+
+### Using Setup Script (Recommended)
+
+**Mac/Linux:**
+```bash
+./setup.sh
+```
+
+**Windows:**
+```bash
+setup.bat
+```
+
+The setup script will guide you through:
+1. Fresh installation with sample data
+2. Database reset and reseeding
+3. Adding seed data only
+4. Creating a superuser
+
+### Manual Seeding
+
+```bash
+# Run migrations first
+docker-compose exec backend python manage.py migrate
+
+# Seed the database with sample data
+docker-compose exec backend python manage.py seed_data
+
+# Or clear existing data and reseed
+docker-compose exec backend python manage.py seed_data --clear
+```
+
+### Demo Users
+
+After seeding, you can log in with these credentials:
+
+| Email | Password | Business Name |
+|-------|----------|---------------|
+| demo@invoiceflow.com | password123 | InvoiceFlow Demo |
+| john@consulting.com | password123 | Smith Consulting |
+| sarah@design.studio | password123 | Creative Design Studio |
+
+### Sample Data Included
+
+- **3 Demo Users** with different business profiles
+- **5 Clients** per user (Tech Corp, Startup Ventures, etc.)
+- **8 Invoices** per user with various statuses (draft, sent, paid, overdue)
+- **Realistic Invoice Items** (web design, consulting, etc.)
+- **Payments** linked to invoices with different methods
+- **10 Expenses** per user across various categories
+
+📖 **For detailed information, see [SEED_DATA.md](./SEED_DATA.md)**
 
 ## Development Setup
 
@@ -167,6 +242,12 @@ docker-compose exec backend python manage.py migrate
 
 # Create superuser in container
 docker-compose exec backend python manage.py createsuperuser
+
+# Seed database with sample data
+docker-compose exec backend python manage.py seed_data
+
+# Seed with clearing existing data
+docker-compose exec backend python manage.py seed_data --clear
 
 # Access Django shell
 docker-compose exec backend python manage.py shell
